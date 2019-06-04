@@ -1,0 +1,8 @@
+[user]
+    name = Gabor Lekeny
+
+[alias]
+    tree = log --oneline --decorate --graph
+
+[diff]
+    tool = vimdiff
