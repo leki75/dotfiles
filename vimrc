@@ -1,19 +1,25 @@
 " https://github.com/fatih/vim-go-tutorial/blob/master/vimrc
 call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-fugitive'
+
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
-
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+
+"Go development
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-"Plug 'sheerun/vim-polyglot'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'SirVer/ultisnips'
 call plug#end()
 
 
@@ -21,27 +27,14 @@ call plug#end()
 " Settings "
 """"""""""""
 
-set nocompatible                " Enables us Vim specific features
-filetype off                    " Reset filetype detection first ...
-filetype plugin indent on       " ... and enable filetype detection
-
-set ttyfast                     " Indicate fast terminal conn for faster redraw
-set laststatus=2                " Show status line always
 "set cursorcolumn
 "set cursorline
-set encoding=utf-8              " Set default encoding to UTF-8
-set autoread                    " Automatically read changed files
-set autoindent                  " Enabile Autoindent
-set backspace=indent,eol,start  " Makes backspace key more powerful.
-set incsearch                   " Shows the match while typing
 set hlsearch                    " Highlight found searches
 set noerrorbells                " No beeps
 set number                      " Show line numbers
-"set list                        " Don't show special characters
 set listchars=tab:▸\ ,eol:¬     " Special characters
 set showbreak=…                 " Continuation character when line is wrapped
 set nowrap                      " Don't wrap long lines
-set showcmd                     " Show me what I'm typing
 set noswapfile                  " Don't use swapfile
 set nobackup                    " Don't create annoying backup files
 set splitright                  " Vertical windows should be split to right
@@ -49,13 +42,11 @@ set splitbelow                  " Horizontal windows should split to bottom
 "set autowrite                   " Automatically save before :next, :make etc.
 set hidden                      " Buffer should still exist if window is closed
 set fileformats=unix,dos,mac    " Prefer Unix over Windows over OS 9 formats
-set noshowmatch                 " Do not show matching brackets by flickering
 set noshowmode                  " We show the mode with airline or lightline
 set ignorecase                  " Search case insensitive...
 set smartcase                   " ... but not it begins with upper case
 set completeopt=menu,menuone    " Show popup menu, even if there is one entry
 set pumheight=10                " Completion window max size
-set lazyredraw                  " Wait to redraw
 
 set tabstop=4
 set softtabstop=4
@@ -69,9 +60,9 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
-syntax enable
 colorscheme onehalfdark
 
+" Additional mappings for vimdiff
 highlight DiffAdd    ctermfg=236 ctermbg=114 guifg=#282c34 guibg=#98c379
 highlight DiffDelete ctermfg=236 ctermbg=168 guifg=#282c34 guibg=#e06c75
 highlight DiffChange ctermfg=236 ctermbg=180 guifg=#282c34 guibg=#e5c07b
@@ -87,10 +78,6 @@ let mapleader = ","
 " Act like D and C
 nnoremap Y y$
 
-" Search mappings
-nnoremap n nzzzv
-nnoremap N Nzzzv
-
 " QuickFix list
 map <C-j> :cnext<CR>
 map <C-k> :cprevious<CR>
@@ -103,7 +90,7 @@ if has('nvim')
 endif
 
 " Enter automatically into the files directory
-"autocmd BufEnter * silent! lcd %:p:h
+autocmd BufEnter * silent! lcd %:p:h
 
 " fzf
 nnoremap <C-p> :FZF<CR>
@@ -119,6 +106,7 @@ map <C-n> :NERDTreeToggle<CR>
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'onehalfdark'
+"let g:airline_theme = 'oceanicnext'
 
 " netrw
 let g:netrw_banner = 0
@@ -129,7 +117,7 @@ let g:netrw_winsize = 25
 
 " vim-go
 let g:go_fmt_command = "goimports"
-let g:go_autodetect_gopath = 1
+let g:go_autodetect_gopath = 0
 let g:go_list_type = "quickfix"
 
 let g:go_highlight_types = 1
