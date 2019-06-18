@@ -1,14 +1,29 @@
-" https://github.com/fatih/vim-go-tutorial/blob/master/vimrc
+"""""""""""
+" Plugins "
+"""""""""""
+
 call plug#begin('~/.vim/plugged')
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
+Plug 'tpope/vim-sensible'           " sensible defaults
+Plug 'tpope/vim-repeat'             " repeat for complex instructions
+Plug 'tpope/vim-commentary'         " comment with gc
+Plug 'tpope/vim-surround'           " surround with cs or S (in visual mode)
 Plug 'tpope/vim-unimpaired'
+
+" Git support
 Plug 'tpope/vim-fugitive'
 
-Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
+" Completion
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
+
+"Plug 'scrooloose/nerdtree'
+"Plug 'jistr/vim-nerdtree-tabs'
 
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'vim-airline/vim-airline'
@@ -79,9 +94,9 @@ let mapleader = ","
 nnoremap Y y$
 
 " QuickFix list
-map <C-j> :cnext<CR>
-map <C-k> :cprevious<CR>
-nnoremap <Leader>a :cclose<CR>
+"map <C-j> :cnext<CR>
+"map <C-k> :cprevious<CR>
+"nnoremap <Leader>a :cclose<CR>
 
 " NeoVim Terminal
 if has('nvim')
@@ -90,7 +105,7 @@ if has('nvim')
 endif
 
 " Enter automatically into the files directory
-autocmd BufEnter * silent! lcd %:p:h
+"autocmd BufEnter * silent! lcd %:p:h
 
 " fzf
 nnoremap <C-p> :FZF<CR>
@@ -102,6 +117,9 @@ map <C-n> :NERDTreeToggle<CR>
 " Plugins "
 """""""""""
 
+" deoplete
+let g:deoplete#enable_at_startup = 1
+
 " airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
@@ -109,7 +127,7 @@ let g:airline_theme = 'onehalfdark'
 "let g:airline_theme = 'oceanicnext'
 
 " netrw
-let g:netrw_banner = 0
+"let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
