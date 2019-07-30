@@ -113,14 +113,25 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias k="kubectl"
+alias ex="ex.nvim"
+alias vim="nvim"
+alias view="view.nvim"
+alias vimdiff="vimdiff.nvim"
 
 # LEKI: Added for zsh-syntax-highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
+# Fuzzy finder
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files'
 
+# Direnv
 eval "$(direnv hook zsh)"
 
+# Go
 export GOPATH=~/go
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+export GOBIN=$GOPATH/bin
+export PATH=$GOBIN:/usr/local/go/bin:$PATH
+
+# Nifi operator
+export NIFI_OPERATOR_DATA=/home/leki/src/nifi-operator/data

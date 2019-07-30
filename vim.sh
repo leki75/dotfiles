@@ -3,13 +3,13 @@
 # Install packages
 sudo apt-get install \
     curl \
-    vim-gtk3
+    neovim
 
 # Install vim plugin manager
-curl -fLso ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Copy configuration
-cp vimrc ~/.vimrc
+ln -s vimrc ~/.config/nvim/init.vim
 
 # Install plugins
-vim -c ":PlugInstall"
+nvim -c ":PlugInstall"
